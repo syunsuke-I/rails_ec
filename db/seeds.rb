@@ -6,3 +6,13 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+5.times do |n|
+  Item.create!(
+    name: "item#{n + 1}",
+    img_address: "img_address_#{n + 1}",
+    description:"item#{n + 1}description", 
+    price:"500", 
+    stock:n + 1, 
+  )
+end
