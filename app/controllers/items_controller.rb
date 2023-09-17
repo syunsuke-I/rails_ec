@@ -3,15 +3,21 @@
 class ItemsController < ApplicationController
   before_action :set_Item, only: %i[show edit update destroy]
 
-  # GET /items or /items.json
+  # GET /items
   def index
     @items = Item.all
   end
 
-  # GET /items/1 or /items/1.json
+  # GET /items/1
   def show
+    items = Item.all
+    # 関連に自分自身を表示させないようにするため
     @item = Item.find(params[:id])
+    @items_except_myself = items.reject { |item| item.id == @item.id }
   end
+
+  # これ以降は何も触っていません
+
   # GET /items/new
   def new
     @item = Item.new
