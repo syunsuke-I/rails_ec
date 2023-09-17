@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[show]
+  before_action :set_item, only: %i[show edit update destroy]
 
   # GET /items
   def index
@@ -14,6 +14,18 @@ class ItemsController < ApplicationController
     # 関連に自分自身を表示させないようにするため
     @item = Item.find(params[:id])
     @items_except_myself = items.reject { |item| item.id == @item.id }
+  end
+
+  # GET /items/new
+  def new
+    @item = Item.new
+  end
+
+  # POST /items or /items.json
+  def create
+    @item = Item.new(permit_params)
+    @item.save
+    redirect_to @item
   end
 
   private
