@@ -9,11 +9,12 @@ class ItemsController < ApplicationController
   end
 
   # GET /items/1 or /items/1.json
-  def show; end
-
+  def show
+    @item = Item.find(params[:id])
+  end
   # GET /items/new
   def new
-    @Item = Item.new
+    @item = Item.new
   end
 
   # GET /items/1/edit
@@ -21,17 +22,9 @@ class ItemsController < ApplicationController
 
   # POST /items or /items.json
   def create
-    @Item = Item.new(Item_params)
-
-    respond_to do |format|
-      if @Item.save
-        format.html { redirect_to Item_url(@Item), notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @Item }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @Item.errors, status: :unprocessable_entity }
-      end
-    end
+    @item = Item.new(permit_params)
+    @item.save
+    redirect_to @item
   end
 
   # PATCH/PUT /items/1 or /items/1.json
@@ -65,7 +58,8 @@ class ItemsController < ApplicationController
   end
 
   # Only allow a list of trusted parameters through.
-  def Item_params
-    params.require(:Item).permit(:title, :description, :status)
+  def permit_params
+     pp :image
+     params.require(:item).permit(:name, :description, :image,:price)
   end
 end

@@ -1,6 +1,10 @@
-<h1>New task</h1>
-<%= render "form", task: @task %>
+<!--画像をActive storageから取得するために簡易的な登録フォームを用意しています-->
+<h1>New item</h1>
 <br>
 <div>
-  <%= link_to "Back to tasks", tasks_path %>
+    <%= form_with model: @item do |form| %>
+      <%= form.text_field :name %><br>
+      <%= form.file_field :image %><br>
+      <%= form.submit %>
+    <% end %>
 </div>

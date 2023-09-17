@@ -10,9 +10,8 @@
 5.times do |n|
   Item.create!(
     name: "item#{n + 1}",
-    img_address: "img_address_#{n + 1}",
     description:"item#{n + 1}description", 
-    price:"500", 
+    price:500 + n*50, 
     stock:n + 1, 
   )
 end
