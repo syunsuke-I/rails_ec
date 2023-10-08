@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateBillingAddresses < ActiveRecord::Migration[7.0]
+class CreateBillingAddressesWithOrderReference < ActiveRecord::Migration[7.0]
   def change
     create_table :billing_addresses do |t|
       t.string :first_name
@@ -11,7 +11,8 @@ class CreateBillingAddresses < ActiveRecord::Migration[7.0]
       t.string :prefecture
       t.string :post_code
       t.string :address
-      t.string :address_2
+      t.string :address2
+      t.references :order, null: true, foreign_key: true
 
       t.timestamps
     end
