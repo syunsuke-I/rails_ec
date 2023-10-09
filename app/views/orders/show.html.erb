@@ -60,30 +60,5 @@
     </div>
   </div>
 </div>
-<section class="py-5">
-  <h2 class="bought_items ms-8 mb-4">購入品一覧</h2>
-  <div class="container px-4 px-lg-5 mt-5">
-    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-      <% @order.order_items.each do |order_item| %>
-        <div class="col mb-5">
-          <div class="card h-100">
-            <% if order_item.item.image.attached? %>
-              <%= image_tag order_item.item.image , class: "card-img-top" , height: "178.66px" , width: "268px" %>
-            <% end %>
-            <% unless order_item.item.image.attached? %>
-              <%= image_tag "https://dummyimage.com/450x300/dee2e6/6c757d.jpg" , class: "card-img-top" %>
-            <% end %>
-            <div class="card-body p-4">
-              <div class="text-center">
-                <!-- 名前は現在のものを使用 -->
-                <h5 class="fw-bolder"><%= order_item.item.name %></h5>
-                <!-- 購入時の値段-->
-                $<%= number_to_currency(order_item.price) %>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</section>
+<%= render partial: 'items', locals: { order: @order } %>
+

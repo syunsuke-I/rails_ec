@@ -14,4 +14,15 @@ class Order < ApplicationRecord
   def formatted_created_at
     billing_address&.created_at&.strftime('%Y/%m/%d %H時%M分')
   end
+
+  def add_items_from_data(order_items_data)
+    order_items_data.each do |data|
+      item = Item.find(data[:item_id])
+      order_items.build(
+        price: item.price,
+        item_id: data[:item_id],
+        amount: data[:amount]
+      )
+    end
+  end  
 end

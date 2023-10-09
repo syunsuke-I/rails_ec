@@ -36,15 +36,17 @@ class OrdersController < ApplicationController
   end
 
   def add_items_to_order(order)
-    params[:order][:order_items_attributes]&.each_value do |order_item_data|
-      item = Item.find(order_item_data[:item_id])
-      order.order_items.build(
-        price: item.price,
+    order_items_data = params[:order][:order_items_attributes]&.values&.map do |order_item_data|
+      {
         item_id: order_item_data[:item_id].to_i,
         amount: order_item_data[:amount].to_i
-      )
+      }
     end
+  
+    # Orderモデルのメソッドを使って、購入明細をOrderに追加
+    order.add_items_from_data(order_items_data)
   end
+  
 
   def send_success_email
     OrderMailer.with(order: @order).send_order_success_email.deliver_now
@@ -52,17 +54,7 @@ class OrdersController < ApplicationController
 
   def deduct_inventory_and_clear_cart
     @cart = current_or_create_cart
-    ActiveRecord::Base.transaction do
-      @cart.cart_items.each do |cart_item|
-        item = cart_item.item
-
-        unless item.save
-          flash[:error] = I18n.t('errors.purchase_error')
-          raise ActiveRecord::Rollback
-        end
-      end
-      @cart.cart_items.destroy_all
-    end
+    @cart.cart_items.destroy_all
   end
 
   def order_params
