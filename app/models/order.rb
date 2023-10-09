@@ -24,5 +24,5 @@ class Order < ApplicationRecord
         amount: data[:amount]
       )
     end
-  end  
+  end
 end

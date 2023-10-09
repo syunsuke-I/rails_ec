@@ -42,11 +42,10 @@ class OrdersController < ApplicationController
         amount: order_item_data[:amount].to_i
       }
     end
-  
+
     # Orderモデルのメソッドを使って、購入明細をOrderに追加
     order.add_items_from_data(order_items_data)
   end
-  
 
   def send_success_email
     OrderMailer.with(order: @order).send_order_success_email.deliver_now
