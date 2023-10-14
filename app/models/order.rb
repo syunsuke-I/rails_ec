@@ -25,7 +25,6 @@ class Order < ApplicationRecord
     end
     total
   end
-  
 
   def discount_price(promotion_code_id)
     promotion_code = PromotionCode.find(promotion_code_id)
