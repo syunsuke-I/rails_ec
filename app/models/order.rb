@@ -15,14 +15,17 @@ class Order < ApplicationRecord
   end
 
   def final_total_price(promotion_code_id)
-    promotion_code = PromotionCode.find(promotion_code_id)
     total = total_price
-    if promotion_code.present?
-      total -= promotion_code.discount_amount.to_i
-      total = 0 if total.negative? # 合計がマイナスにならないように
+    if promotion_code_id
+      promotion_code = PromotionCode.find_by(id: promotion_code_id)
+      if promotion_code
+        total -= promotion_code.discount_amount.to_i
+        total = 0 if total.negative? # 合計がマイナスにならないように
+      end
     end
     total
   end
+  
 
   def discount_price(promotion_code_id)
     promotion_code = PromotionCode.find(promotion_code_id)
