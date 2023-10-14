@@ -19,6 +19,9 @@
         <% if @is_admin %>
           <li class="nav-item"><a class="nav-link mb-1" href="/orders">Detailed statement</a></li>
         <% end %>
+        <% if @is_admin %>
+          <li class="nav-item"><a class="nav-link mb-1" href="/promotion_codes">Promotion Codes</a></li>
+        <% end %>        
       </ul>
       <form class="d-flex">
         <button class="btn btn-outline-dark" type="submit">

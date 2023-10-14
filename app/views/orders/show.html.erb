@@ -43,7 +43,12 @@
       <% @order.order_items.each do |order_item| %>
         <p><%= order_item.item.name %> / <%= number_to_currency(order_item.price) %>  / <%= order_item.amount %>個</p>
       <% end %>
-      <p class="font-weight-bold">合計 <%= number_to_currency(@order.total_price) %></p>
+      <% if @order.promotion_code_id %>
+        <div class="mb-3">
+          割引額:  <%= number_to_currency(@order.discount_price(@order.promotion_code_id)) %>
+        </div>
+      <% end %>
+      <p class="font-weight-bold">合計 <%= number_to_currency(@order.final_total_price(@order.promotion_code_id)) %></p>
     </div>
     <div class="order-section">
       <h2 class="mb-3">購入者情報</h2>

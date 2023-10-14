@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener'
   resources 'items'
   resources 'orders'
+  resources 'promotion_codes'
   resource :cart, only: [:show]
 
   root 'items#index'

@@ -9,7 +9,7 @@
   }
 </style>
 <%= render partial: 'nav'%>
-<% [@order.payment, @order.billing_address].each do |object| %>
+<% [@order, @order.payment, @order.billing_address].each do |object| %>
   <% if object.errors.any? %>
     <div class="alert alert-danger">
       <ul class="mb-0">
@@ -20,6 +20,13 @@
     </div>
   <% end %>
 <% end %>
+<div class="notifications">
+  <% flash.each do |message_type, message| %>
+    <div class='<%= message_type %>'>
+      <%= message %>
+    </div>
+  <% end %>
+</div>
 <div class="container">
   <div class="py-5 text-center">
     <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
@@ -51,18 +58,19 @@
           <% end %>
           <li class="list-group-item d-flex justify-content-between">
             <span>Total (USD)</span>
-            <strong><%= number_to_currency(@cart.total_price) %></strong>
+            <strong><%= number_to_currency(@cart.final_total_price(session[:discount_amount])) %></strong>
           </li>
+          <% if session[:discount_amount].present? %>
+            <div class="alert alert-success">
+              割引額: <%= number_to_currency(session[:discount_amount]) %>
+            </div>
+          <% end %>
         </ul>
       </div>
-      <form class="card p-2">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Promo code">
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-secondary">Redeem</button>
-          </div>
-        </div>
-      </form>
+      <div class="input-group">
+        <%= form.text_field :promotion_code_code, class: "form-control", placeholder: "プロモーションコードを入力", value: session[:promotion_code] || '' %>
+        <%= form.submit "Redeem", class: "btn btn-secondary", name: "redeem_button" %>
+      </div>
     </div>
     <!--Billing address-->
     <div class="col-md-8 order-md-1">
