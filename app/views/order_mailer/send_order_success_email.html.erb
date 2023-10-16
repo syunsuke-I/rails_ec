@@ -15,7 +15,7 @@
       <% @order.order_items.each do |order_item| %>
         <p><%= order_item.item.name %> / <%= number_to_currency(order_item.price) %>  / <%= order_item.amount %>個</p>
       <% end %>
-      <p class="font-weight-bold">合計 <%= number_to_currency(@total_price) %></p>
+      <p class="font-weight-bold">合計 <%= number_to_currency(@final_total_price) %></p>
     </div>
     <div class="order-section">
       <h2 class="mb-3">購入者情報</h2>

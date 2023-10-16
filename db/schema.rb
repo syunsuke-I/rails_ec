@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_07_110618) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_11_121705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,9 +52,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_110618) do
     t.string "post_code"
     t.string "address"
     t.string "address2"
+    t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "order_id"
     t.index ["order_id"], name: "index_billing_addresses_on_order_id"
   end
 
@@ -100,6 +100,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_110618) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "promotion_code_id"
+    t.index ["promotion_code_id"], name: "index_orders_on_promotion_code_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -108,10 +110,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_110618) do
     t.string "credit_card_number"
     t.string "expiration_date"
     t.integer "cvv"
+    t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "order_id"
     t.index ["order_id"], name: "index_payments_on_order_id"
+  end
+
+  create_table "promotion_codes", force: :cascade do |t|
+    t.string "code"
+    t.integer "discount_amount"
+    t.boolean "used"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -127,6 +137,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_110618) do
   add_foreign_key "cart_items", "items"
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "promotion_codes"
   add_foreign_key "orders", "users"
   add_foreign_key "payments", "orders"
 end

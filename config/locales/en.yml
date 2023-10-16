@@ -41,5 +41,12 @@ en:
     out_of_stock: "This item is out of stock."
   order:
     thank_you: "Thank you for your purchase"
+    is_empty: "Please add Item to your cart."    
   mail:
     subject: "Purchase Details"
+  promotion_code:
+    not_exist: "This promotion code does not exist!"
+    is_invalid: "This promotion code is invalid!"
+    is_applied: "Promotion code applied successfully"
+    used_promotion_code: "The promotion code has already been used by another customer and cannot be used."
+

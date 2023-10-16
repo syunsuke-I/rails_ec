@@ -215,5 +215,11 @@ ja:
     update_failure: "商品情報の更新に失敗しました。もう一度お試しください。"
   order:
     thank_you: "ご購入ありがとうございます"
+    is_empty: "カートにアイテムを追加してください"        
   mail:
-    subject: "購入明細書"  
+    subject: "購入明細書" 
+  promotion_code:
+    not_exist: "そのプロモーションコードは存在しません"
+    is_invalid: "そのプロモーションコードは無効です"
+    is_applied: "プロモーションコードが適用されました"    
+    used_promotion_code: "そのプロモーションコードは他のお客様使われたため使用できません" 

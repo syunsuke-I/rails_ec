@@ -1,0 +1,21 @@
+<%= render partial: 'nav'%>
+<table class="table table-hover table-sm">
+  <thead class="bg-light">
+    <tr>
+      <th scope="col" >#</th>
+      <th scope="col">コード</th>
+      <th scope="col">割引き額</th>
+      <th scope="col">使用状態</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @promotion_code.each_with_index do |code, index| %>
+      <tr>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= code.code %></td>
+        <td><%= code.discount_amount %></td>
+        <td><%= code.used ? "使用済み" : "未使用" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
