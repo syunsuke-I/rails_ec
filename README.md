@@ -1,7 +1,5 @@
 # README
 
-課題用のrailsテンプレートです。
-
 ### 前提
 
 - dockerが必要です。
@@ -48,4 +46,5 @@ docker compose run --rm web bin/htmlbeautifier
 
 ### ER図
 
+![](/rails_ec/img_for_readme/mermaid-diagram-2023-10-16-105935.png)
 
