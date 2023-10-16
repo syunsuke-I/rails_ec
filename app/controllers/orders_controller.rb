@@ -91,7 +91,7 @@ class OrdersController < ApplicationController
     return if code.blank?
 
     promotion = PromotionCode.find_by(code:)
-    promotion.update(used: true)
+    promotion.update!(used: true)
   end
 
   def clear_promotion_from_session
