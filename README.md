@@ -46,5 +46,5 @@ docker compose run --rm web bin/htmlbeautifier
 
 ### ER図
 
-![](/rails_ec/img_for_readme/mermaid-diagram-2023-10-16-105935.png)
+![]([/rails_ec/img_for_readme/mermaid-diagram-2023-10-16-105935.png](https://github.com/syunsuke-I/rails_ec/blob/main/img_for_readme/mermaid-diagram-2023-10-16-105935.png)https://github.com/syunsuke-I/rails_ec/blob/main/img_for_readme/mermaid-diagram-2023-10-16-105935.png)
 
