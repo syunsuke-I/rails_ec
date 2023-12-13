@@ -1,5 +1,9 @@
 # README
 
+### DEMO
+
+![49FADE61-F6A6-4AC0-A664-EA9FBC72077B_1_206_a](https://github.com/syunsuke-I/rails_ec/assets/132537904/8aeae8ec-8a05-4a79-877e-a6e3869561fd)
+
 ### 前提
 
 - dockerが必要です。
