@@ -6,7 +6,6 @@ class CreatePromotionCodes < ActiveRecord::Migration[7.0]
       t.string :code
       t.integer :discount_amount
       t.boolean :used, null: false, default: false
-
       t.timestamps
     end
   end
