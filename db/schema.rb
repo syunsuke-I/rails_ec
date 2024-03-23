@@ -89,10 +89,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_121705) do
     t.bigint "item_id", null: false
     t.integer "amount"
     t.decimal "price"
+    t.bigint "promotion_code_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_order_items_on_item_id"
     t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["promotion_code_id"], name: "index_order_items_on_promotion_code_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -119,7 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_121705) do
   create_table "promotion_codes", force: :cascade do |t|
     t.string "code"
     t.integer "discount_amount"
-    t.boolean "used"
+    t.boolean "used", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -137,6 +139,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_11_121705) do
   add_foreign_key "cart_items", "items"
   add_foreign_key "order_items", "items"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "promotion_codes"
   add_foreign_key "orders", "promotion_codes"
   add_foreign_key "orders", "users"
   add_foreign_key "payments", "orders"
