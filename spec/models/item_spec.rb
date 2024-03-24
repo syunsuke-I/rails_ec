@@ -2,47 +2,54 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
+
+  let(:item) { Item.new(name: "Test Item", price: 100, stock: 10) }
+
   # モデルが存在することを確認
   it "is valid with valid attributes" do
-    item = Item.new(name: "Test Item", price: 100, stock: 10)
     expect(item).to be_valid
   end
 
   # nameバリデーションをテスト
   it "is not valid without a name" do
-    item = Item.new(name: nil, price: 100, stock: 10)
+    item.name = nil
     expect(item).not_to be_valid
     expect(item.errors[:name]).to include("を入力してください")
   end
 
   # priceバリデーションをテスト
   it "is not valid with a negative price" do
-    item = Item.new(name: "Test Item", price: -1, stock: 10)
+    item.price = -1
     expect(item).not_to be_valid
     expect(item.errors[:price]).to include("は0..の範囲に含めてください")
   end
 
   # stockバリデーションをテスト
   it "is not valid with a negative stock" do
-    item = Item.new(name: "Test Item", price: 100, stock: -1)
+    item.stock = -1
     expect(item).not_to be_valid
     expect(item.errors[:stock]).to include("は0..の範囲に含めてください")
   end
 
   # enough_stock? メソッドをテスト
   describe "#enough_stock?" do
-    context "when enough stock is available" do
-      it "returns true" do
-        item = Item.new(stock: 10)
-        expect(item.enough_stock?(5)).to be true
-      end
-    end
+  let(:item) { Item.new(stock: stock_amount) }
 
-    context "when not enough stock is available" do
-      it "returns false" do
-        item = Item.new(stock: 5)
-        expect(item.enough_stock?(10)).to be false
-      end
+  context "when enough stock is available" do
+    let(:stock_amount) { 10 }
+
+    it "returns true" do
+      expect(item.enough_stock?(5)).to be true
     end
   end
+
+  context "when not enough stock is available" do
+    let(:stock_amount) { 5 }
+
+    it "returns false" do
+      expect(item.enough_stock?(10)).to be false
+    end
+  end
+end
+
 end
