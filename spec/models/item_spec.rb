@@ -33,23 +33,23 @@ RSpec.describe Item, type: :model do
 
   # enough_stock? メソッドをテスト
   describe "#enough_stock?" do
-  let(:item) { Item.new(stock: stock_amount) }
+    let(:item) { Item.new(stock: stock_amount) }
 
-  context "when enough stock is available" do
-    let(:stock_amount) { 10 }
+    context "when enough stock is available" do
+      let(:stock_amount) { 10 }
 
-    it "returns true" do
-      expect(item.enough_stock?(5)).to be true
+      it "returns true" do
+        expect(item.enough_stock?(5)).to be true
+      end
+    end
+
+    context "when not enough stock is available" do
+      let(:stock_amount) { 5 }
+
+      it "returns false" do
+        expect(item.enough_stock?(10)).to be false
+      end
     end
   end
-
-  context "when not enough stock is available" do
-    let(:stock_amount) { 5 }
-
-    it "returns false" do
-      expect(item.enough_stock?(10)).to be false
-    end
-  end
-end
 
 end
