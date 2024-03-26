@@ -41,7 +41,7 @@ jobs:
       run: yarn install
     - name: Setup database
       env:
-        RAILS_ENV: test
+        RAILS_ENV: development
         PGHOST: localhost
         PGUSER: postgres
         PGPASSWORD: postgres
@@ -50,7 +50,7 @@ jobs:
         bin/rails db:schema:load
     - name: Run tests
       env:
-        RAILS_ENV: test
+        RAILS_ENV: development
         PGHOST: localhost
         PGUSER: postgres
         PGPASSWORD: postgres
