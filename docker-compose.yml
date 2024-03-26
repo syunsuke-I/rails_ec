@@ -6,6 +6,7 @@ services:
       - db:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=password
+      - DATABASE_HOST=postgres
   web:
     build: .
     image: rails_template:latest
