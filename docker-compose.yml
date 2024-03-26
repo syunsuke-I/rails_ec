@@ -6,11 +6,12 @@ services:
       - db:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=password
-      - DATABASE_HOST=db
   web:
     build: .
     image: rails_template:latest
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    environment:
+      - DATABASE_HOST=db
     volumes:
       - .:/myapp
       - bundle:/usr/local/bundle
