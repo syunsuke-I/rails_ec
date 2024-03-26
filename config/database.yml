@@ -8,10 +8,7 @@ default: &default
 
 development:
   <<: *default
-  database: myapp_test
-  username: postgres
-  password: postgres
-  host: db
+  database: myapp_development
 
 
 test:

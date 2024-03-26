@@ -77,7 +77,7 @@ gem 'letter_opener_web', '~> 1.0'
 
 gem 'rexml', '~> 3.2', '>= 3.2.6'
 
-group :development do
+group :development, :test do
   gem 'bullet'
 end
 
