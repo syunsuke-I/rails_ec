@@ -14,7 +14,7 @@ RSpec.describe Item, type: :model do
   it "is not valid without a name" do
     item.name = nil
     expect(item).not_to be_valid
-    expect(item.errors[:name]).to include("を入力してください")
+    expect(item.errors[:name]).to include("を入力してください!ß")
   end
 
   # priceバリデーションをテスト
