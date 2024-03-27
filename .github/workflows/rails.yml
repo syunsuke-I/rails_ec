@@ -53,4 +53,4 @@ jobs:
         PGHOST: localhost
         PGUSER: postgres
         PGPASSWORD: password
-      run: bin/rails test
+      run: bundle exec rspec
