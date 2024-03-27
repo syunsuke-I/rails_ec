@@ -21,15 +21,29 @@ RSpec.describe ItemsController, type: :controller do
       expect(response.body).to include ""
     end
 
-    it "creates an item with price and stock nil" do
-      post items_path, params: { item: { name: "New Item", price: "", stock: "" } }
-      expect(response).to redirect_to(item_path(assigns(:item)))
-      follow_redirect!
-
-      created_item = Item.last
-      expect(created_item.price).to be_nil
-      expect(created_item.stock).to be_nil
+  #Use img name to edit and create
+    describe 'POST #create' do
+      context 'with valid attributes' do
+        it 'creates a new item and redirects to the admin items page' do
+          expect {
+            post :create, params: { item: { name: 'Test Item', description: 'Test Description', price: 100, stock: 10 } }
+          }.to change(Item, :count).by(1)
+          expect(response).to redirect_to('/admin/items')
+        end
+      end
     end
+
+
+  context 'with invalid attributes' do
+    it 'does not create a new item and re-renders the new method' do
+      expect {
+        post :create, params: { item: { name: '', description: 'Test Description', price: 100, stock: 10 } }
+      }.not_to change(Item, :count)
+      
+      expect(response).to render_template(:new)
+    end
+  end
+  
 
     it "assigns @img_full_name as '未選択'" do
       expect(assigns(:img_full_name)).to eq '未選択'
